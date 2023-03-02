@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block head%}
+
+
+{% endblock %}
+
+{% block body%}
+
+
+
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+                <h1>Watchlist</h1>
+            </tr>
+            <tr>
+            
+                {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            
+                            {% for message in messages %}
+                                <li>{{ message }}</li>
+                            {% endfor %}
+                            
+                        {% endif %}
+                    {% endwith %}
+            </tr>
+            
+            <tr>
+                <form method="Post">
+                <label for="stock" class="form-label"></label>
+                <input placeholder="Stock Ticker" type="text" name="stock" class="form-control" list="stocks"/> 
+            </tr>      
+            
+        <tr>
+            <input name="add" type="submit" value="Add" class="mt-2"/>
+            
+        </tr>
+            </form>
+        
+        <tr >
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>Change</th>
+        </tr>
+        {% if results %}
+        {% for i in range(results|length) %}
+        <tr {% if price_change[i] - stonk_price_list[i] <= 0 %}class="bg-danger-subtle"{% elif price_change[i] - stonk_price_list[i] > 0 %}class="bg-success-subtle"{% endif %}>
+            <th>
+                {{ results[i] }}
+            </th>
+            <th>
+                ${{ '{:.2f}'.format(stonk_price_list[i]) }}
+            </th>
+            <th>
+                ${{ '{:.2f}'.format(price_change[i] - stonk_price_list[i]) }}
+            </th>
+            <th>
+                <form method="post">
+                    <input type="hidden" name="delete_index" value="{{ i }}">
+                    <input type="submit" name="delete" value="Delete">
+                </form>
+            </th>
+           </tr> 
+        {% endfor %}
+    {% endif %}
+    
+    
+    
+    
+    
+
+        </thead>
+    </table>
+</div>
+
+{% endblock %}

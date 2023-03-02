@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}User{% endblock %}
+
+{% block body%}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+<div class="container">
+<H3>Welcome {{ email }}</H3>
+<p>Tank you for being user here is meme </p>
+</div>
+<div class="container">
+    <img src="static\download.jfif" alt="">
+</div>
+<button class="btn" ></button>
+
+{% endblock %}
